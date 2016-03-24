@@ -20,6 +20,7 @@ int main()
 
 
     string img_filepath = "../imgs/static_hopper/RGB/";
+    string depth_filepath = "../imgs/static_hopper/Depth/";
 
     if(!img_filepath.empty())
     {
@@ -35,7 +36,8 @@ int main()
         }
         std::sort(imageNames.begin(),imageNames.end());
 
-        namedWindow( "Hopper", 1 );
+        namedWindow( "Hopper_RGB", 1 );
+        namedWindow( "Hopper_Depth", 1 );
         cv::Ptr<cv::FeatureDetector> detector = cv::xfeatures2d::SIFT::create();
 
 
@@ -43,9 +45,17 @@ int main()
         Mat gray, prevGray;
         for(int i = 0; i < imageNames.size(); i++)
         {
-            std::vector<cv::KeyPoint> keypoints;
+            std::vector<cv::KeyPoint> keypoints, keypoints_dep;
 
             Mat image = imread(img_filepath + imageNames[i], cv::IMREAD_COLOR);
+            Mat depth = imread(depth_filepath + imageNames[i], cv::IMREAD_COLOR);
+
+            double d_min, d_max;
+            minMaxLoc(depth, &d_min, &d_max);
+
+            Mat visual_depth;
+            depth.convertTo(visual_depth, CV_8U, 255.0/(d_max));
+
             cvtColor(image, gray, COLOR_BGR2GRAY);
             detector->detect(gray, keypoints);
 
@@ -68,6 +78,9 @@ int main()
                     points[1][k++] = points[1][j];
                     circle( image, points[0][j], 2, Scalar(0,0,255), -1, 8);
                     line( image, points[0][j], points[1][j], Scalar(0,255,0), 1, 8, 0);
+
+                    circle(visual_depth, points[0][j], 2, Scalar(0,0,255), -1, 8);
+                    line(visual_depth, points[0][j], points[1][j], Scalar(0,255,0), 1, 8, 0);
                 }
                 points[1].resize(k);
             }
@@ -80,9 +93,13 @@ int main()
                 }
             }
             for(int n = 0; n < points[1].size(); n++)
+            {
                 circle( image, points[1][n], 2, Scalar(0,255,0), -1, 8);
+                circle(visual_depth, points[1][n], 2, Scalar(0,255,0), -1, 8);
+            }
 
-            imshow("Hopper", image);
+            imshow("Hopper_RGB", image);
+            imshow("Hopper_Depth", visual_depth);
             waitKey(30);
             std::swap(points[1], points[0]);
             cv::swap(prevGray, gray);

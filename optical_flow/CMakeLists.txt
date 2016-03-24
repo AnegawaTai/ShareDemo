@@ -74,6 +74,6 @@ set(OPENCV_310_LIB ${OPENCV_310_CORE}
 set(sample_dir ${CMAKE_CURRENT_SOURCE_DIR}/src/)
 
 
-add_executable( OF_Sample ${sample_dir}main.cpp)
+add_executable( OF_basic_test ${sample_dir}main.cpp)
 
-target_link_libraries(OF_Sample ${OPENCV_310_LIB})
+target_link_libraries(OF_basic_test ${OPENCV_310_LIB})

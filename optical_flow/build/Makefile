@@ -103,24 +103,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named OF_Sample
+# Target rules for targets named OF_basic_test
 
 # Build rule for target.
-OF_Sample: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 OF_Sample
-.PHONY : OF_Sample
+OF_basic_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 OF_basic_test
+.PHONY : OF_basic_test
 
 # fast build rule for target.
-OF_Sample/fast:
-	$(MAKE) -f CMakeFiles/OF_Sample.dir/build.make CMakeFiles/OF_Sample.dir/build
-.PHONY : OF_Sample/fast
+OF_basic_test/fast:
+	$(MAKE) -f CMakeFiles/OF_basic_test.dir/build.make CMakeFiles/OF_basic_test.dir/build
+.PHONY : OF_basic_test/fast
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) -f CMakeFiles/OF_Sample.dir/build.make CMakeFiles/OF_Sample.dir/src/main.cpp.o
+	$(MAKE) -f CMakeFiles/OF_basic_test.dir/build.make CMakeFiles/OF_basic_test.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -128,7 +128,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) -f CMakeFiles/OF_Sample.dir/build.make CMakeFiles/OF_Sample.dir/src/main.cpp.i
+	$(MAKE) -f CMakeFiles/OF_basic_test.dir/build.make CMakeFiles/OF_basic_test.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -136,7 +136,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) -f CMakeFiles/OF_Sample.dir/build.make CMakeFiles/OF_Sample.dir/src/main.cpp.s
+	$(MAKE) -f CMakeFiles/OF_basic_test.dir/build.make CMakeFiles/OF_basic_test.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 # Help Target
@@ -145,9 +145,9 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... OF_Sample"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... OF_basic_test"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

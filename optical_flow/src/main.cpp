@@ -22,6 +22,9 @@ int main()
     string img_filepath = "../imgs/static_hopper/RGB/";
     string depth_filepath = "../imgs/static_hopper/Depth/";
 
+    string img_output = "../output/RGB/";
+    string depth_output = "../output/Depth/";
+
     if(!img_filepath.empty())
     {
         DIR *dir_imgs = opendir(img_filepath.c_str());
@@ -98,9 +101,13 @@ int main()
                 circle(visual_depth, points[1][n], 2, Scalar(0,255,0), -1, 8);
             }
 
+            imwrite(img_output + imageNames[i], image);
+            imwrite(depth_output + imageNames[i], visual_depth);
+
             imshow("Hopper_RGB", image);
             imshow("Hopper_Depth", visual_depth);
-            waitKey(30);
+
+            waitKey(10);
             std::swap(points[1], points[0]);
             cv::swap(prevGray, gray);
         }
